@@ -1,34 +1,43 @@
 package com.GIMP_plugin_repository.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
-
 @Entity
-@Table(name = "version_table")
+@Table(name = "comment_table")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-
-public class Version {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "version_id")
+    @Column(name = "comment_id")
     private Long id;
-    private String versionNumber;
-    private Date releaseDate;
+    private String comment_text;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_review_id", referencedColumnName = "review_id")
+    private Review review;
 
     @ManyToOne
     @JoinColumn(name = "fk_plugin_id", referencedColumnName = "plugin_id")
     private Plugin plugin;
 
-    @OneToMany(mappedBy = "versions" , cascade = CascadeType.ALL)
-    private List<Download> downloads;
+    @ManyToOne
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
+    private User user;
+
+
+
+
+
+
+
+
 }

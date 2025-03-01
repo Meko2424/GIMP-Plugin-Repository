@@ -1,12 +1,17 @@
 package com.GIMP_plugin_repository.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Table(name = "category_table")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+
 public class Category {
 
     @Id
@@ -15,7 +20,6 @@ public class Category {
     private Long id;
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_category_id", referencedColumnName = "category_id")
+    @OneToMany(mappedBy = "category" , cascade = CascadeType.ALL)
     private List<Plugin> plugins;
 }
