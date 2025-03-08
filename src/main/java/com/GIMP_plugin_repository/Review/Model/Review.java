@@ -2,12 +2,11 @@ package com.GIMP_plugin_repository.Review.Model;
 
 import com.GIMP_plugin_repository.Plugin.Model.Plugin;
 import com.GIMP_plugin_repository.User.Model.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.GIMP_plugin_repository.Version.Model.PluginVersion;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -23,11 +22,11 @@ public class Review {
     private String comment;
     private Date reviewDate;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "reviews", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<User> users;
 
-    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
+    private User user;
+
     @ManyToOne
     @JoinColumn(name = "fk_plugin_id", referencedColumnName = "plugin_id")
     private Plugin plugin;

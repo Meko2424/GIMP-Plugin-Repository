@@ -22,7 +22,7 @@ public class Tag {
     private Long id;
     private String name;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "tags", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Plugin> plugins;
+
+//    @ManyToMany(mappedBy = "tags")
+//    private Plugin plugins;
 }

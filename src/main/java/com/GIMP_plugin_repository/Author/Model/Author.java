@@ -23,6 +23,6 @@ public class Author {
     private String name;
 
 
-    @OneToMany(mappedBy = "author" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Plugin> plugins;
+//    @OneToMany(mappedBy = "author" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Plugin> plugins;
 }

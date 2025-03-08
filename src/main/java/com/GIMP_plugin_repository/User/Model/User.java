@@ -2,6 +2,9 @@ package com.GIMP_plugin_repository.User.Model;
 
 import com.GIMP_plugin_repository.Plugin.Model.Plugin;
 import com.GIMP_plugin_repository.Review.Model.Review;
+import com.GIMP_plugin_repository.Tag.Model.Tag;
+import com.GIMP_plugin_repository.Version.Model.PluginVersion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,21 +23,22 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+
+    @JsonIgnore
     private String password;
     private String role;
 
     @ManyToMany
-    @JoinTable(name = "PLUGIN_DOWNLOAD",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "plugin_id")
+    @JoinTable(name = "userDownload",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "plugin_id")
     )
     private List<Plugin> plugins;
 
-    @JsonManagedReference
-    @ManyToMany
-    @JoinTable(name = "USER_REVIEW",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "review_id")
-    )
+    @OneToMany(mappedBy = "user")
     private List<Review> reviews;
+
+
+
+
 }
