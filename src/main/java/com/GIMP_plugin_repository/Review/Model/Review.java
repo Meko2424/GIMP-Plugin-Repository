@@ -8,9 +8,9 @@ import lombok.Data;
 
 import java.util.Date;
 
-@Entity
-@Data
-@Table(name = "REVIEW")
+//@Entity
+//@Data
+//@Table(name = "REVIEW")
 public class Review {
 
     @Id
@@ -28,7 +28,7 @@ public class Review {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "fk_plugin_id", referencedColumnName = "plugin_id")
-    private Plugin plugin;
+//    @JoinColumn(name = "fk_plugin_id", referencedColumnName = "plugin_id")
+    private PluginVersion pluginVersion;
 
 }

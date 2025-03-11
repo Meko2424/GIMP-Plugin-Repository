@@ -8,12 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
-@Entity
-@Table(name = "TAG")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+//
+//@Entity
+//@Table(name = "TAG")
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Data
 public class Tag {
 
     @Id

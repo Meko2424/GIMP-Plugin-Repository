@@ -11,34 +11,34 @@ import lombok.Data;
 
 import java.util.List;
 
-@Entity
-@Data
-@Table(name = "USER")
+//@Entity
+//@Data
+//@Table(name = "USER")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-
-    @JsonIgnore
-    private String password;
-    private String role;
-
-    @ManyToMany
-    @JoinTable(name = "userDownload",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "plugin_id")
-    )
-    private List<Plugin> plugins;
-
-    @OneToMany(mappedBy = "user")
-    private List<Review> reviews;
-
-
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "user_id")
+//    private Long id;
+//    private String firstName;
+//    private String lastName;
+//    private String email;
+//
+//    @JsonIgnore
+//    private String password;
+//    private String role;
+//
+//    @ManyToMany
+//    @JoinTable(name = "userDownload",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "pluginVersion_id")
+//    )
+//    private List<PluginVersion> pluginVersions;
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<Review> reviews;
+//
+//
 
 
 }
