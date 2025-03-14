@@ -9,7 +9,12 @@ public class ModelMapperConfig {
 
     @Bean
     public ModelMapper modelMapper(){
-        return new ModelMapper();
+//        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration()
+                .setSkipNullEnabled(true)  // Ignore null values
+                .setFieldMatchingEnabled(true);
+        return modelMapper;
     }
 
 

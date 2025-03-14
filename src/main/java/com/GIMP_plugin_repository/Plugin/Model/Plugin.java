@@ -1,14 +1,14 @@
 package com.GIMP_plugin_repository.Plugin.Model;
 
 import com.GIMP_plugin_repository.Author.Model.Author;
+import com.GIMP_plugin_repository.Download.Model.DownloadPlugin;
+import com.GIMP_plugin_repository.Review.Model.Review;
 import com.GIMP_plugin_repository.Version.Model.PluginVersion;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,11 +29,23 @@ public class Plugin {
     @JoinColumn(name = "fk_author_id", referencedColumnName = "author_id")
     private Author author;
 
-    @Getter
+
     @OneToMany(mappedBy = "plugin",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<PluginVersion> pluginVersions;
+
+    //================== New added attributes ==================== //
+
+    @OneToMany(mappedBy = "plugin",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<DownloadPlugin> pluginDownloads;
+
+    @OneToMany(mappedBy = "plugin",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
 
 }

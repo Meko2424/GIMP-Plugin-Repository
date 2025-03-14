@@ -1,18 +1,16 @@
 package com.GIMP_plugin_repository.Plugin.Dto;
 
-import com.GIMP_plugin_repository.Author.Dto.AuthorDto;
-import com.GIMP_plugin_repository.Plugin.Model.Plugin;
+import com.GIMP_plugin_repository.Download.Dto.DownloadPluginDto;
+import com.GIMP_plugin_repository.Review.Dto.ReviewDto;
 import com.GIMP_plugin_repository.Version.Dto.PluginVersionDto;
-import com.GIMP_plugin_repository.Version.Model.PluginVersion;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 import lombok.*;
 
 
-@Getter
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +22,10 @@ public class PluginDto {
     private String authorName;
     private List<PluginVersionDto> pluginVersions;
 
+    //=============== New added ================= //
 
+    private List<DownloadPluginDto> downloadPlugins;
+    private List<ReviewDto> reviews;
 
 
 }
