@@ -9,7 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PluginVersionController {
 
-//    public ResponseEntity<PluginVersionDto> getPluginByIdAndVersionId(@RequestBody PluginVersionDto pluginVersionDto){
-//
-//    }
+
 }

@@ -35,7 +35,7 @@ public class User {
             (mappedBy = "user",
                     fetch = FetchType.LAZY,
                     cascade = CascadeType.ALL)
-    private List<DownloadPlugin> pluginDownloads;
+    private List<DownloadPlugin> downloads;
 
     @OneToMany
             (mappedBy = "user",

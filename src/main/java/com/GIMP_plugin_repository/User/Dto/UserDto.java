@@ -15,6 +15,6 @@ public class UserDto {
     private Long id;
     private String name;
     private String email;
-    private List<DownloadPluginDto> pluginDownloads;
+    private List<DownloadPluginDto> downloads;
     private List<ReviewDto> reviews;
 }

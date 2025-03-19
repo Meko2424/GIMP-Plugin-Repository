@@ -1,5 +1,8 @@
 package com.GIMP_plugin_repository.Review.Dto;
 
+import com.GIMP_plugin_repository.User.Model.User;
+import com.GIMP_plugin_repository.Version.Model.PluginVersion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +17,11 @@ public class ReviewDto {
     private Long id;
     private Long rating;
     private String comment;
-//    @JsonFormat(pattern = "dd/MM/yyyy")
+//    private User user;
+    @JsonIgnore
+    private PluginVersion pluginVersion;
+
+
     private LocalDate reviewDate = LocalDate.now();
-    private Long UserId;
-    private Long PluginId;
+
 }

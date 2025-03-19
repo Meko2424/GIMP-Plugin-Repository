@@ -5,17 +5,16 @@ import com.GIMP_plugin_repository.Author.Repository.AuthorRepository;
 import com.GIMP_plugin_repository.Plugin.Dto.PluginDto;
 import com.GIMP_plugin_repository.Plugin.Model.Plugin;
 import com.GIMP_plugin_repository.Plugin.Repository.PluginRepository;
+import com.GIMP_plugin_repository.Review.Dto.ReviewDto;
+import com.GIMP_plugin_repository.Review.Model.Review;
+import com.GIMP_plugin_repository.Review.Repository.ReviewRepository;
 import com.GIMP_plugin_repository.Version.Dto.PluginVersionDto;
 import com.GIMP_plugin_repository.Version.Model.PluginVersion;
 import com.GIMP_plugin_repository.Version.Repository.PluginVersionRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,6 +24,8 @@ public class PluginService {
 
     @Autowired
     private  PluginRepository pluginRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
    @Autowired
     private PluginVersionRepository pluginVersionRepository;
@@ -67,8 +68,12 @@ public class PluginService {
     // Create a version
 
     public PluginVersionDto createPluginVersion(Long pluginId, PluginVersionDto pluginVersionDto){
+
+        // Retrieve plugin by pluginId
         Plugin plugin = pluginRepository.findById(pluginId)
                 .orElseThrow(() -> new RuntimeException("Plugin not found"));
+
+
         PluginVersion pluginVersion = modelMapper.map(pluginVersionDto, PluginVersion.class);
         pluginVersion.setPlugin(plugin);
         PluginVersion savedPluginVersion = pluginVersionRepository.save(pluginVersion);
@@ -89,6 +94,50 @@ public class PluginService {
         return Optional.ofNullable(modelMapper.map(plugin, PluginDto.class));
     }
 
+//    public List<ReviewDto> getReviewsByPluginAndVersion(Long pluginId, String versionNumber){
+//        Plugin plugin = pluginRepository.findById(pluginId)
+//                .orElseThrow(() -> new RuntimeException("Plugin not found"));
+//        PluginVersion pluginVersion = pluginVersionRepository.findByPluginAndVersionNumber(plugin, versionNumber);
+////                .orElseThrow(() -> new RuntimeException("Plugin with ID  not found"));
+//
+//        List<Review> reviews = reviewRepository.findByPluginVersion(pluginVersion);
+//        return reviews.stream().map(review -> modelMapper.map(review, ReviewDto.class))
+//                .collect(Collectors.toList());
+//    }
+
+public ReviewDto createReview(Long pluginId, String versionNumber, ReviewDto reviewDto){
+//
+    Plugin plugin = pluginRepository.findById(pluginId).orElseThrow(()-> new RuntimeException("Plugin not found"));
+    // Retrieve plugin version by pluginId and version number
+    PluginVersion pluginVersion = pluginVersionRepository.findByPluginAndVersionNumber(plugin, versionNumber);
+//            .orElseThrow(() -> new RuntimeException("Version not found"));
+
+    // Create a new Review entity and set values form ReviewDto
+    Review review = modelMapper.map(reviewDto, Review.class);
+
+    review.setPluginVersion(pluginVersion);
+    review.setRating(reviewDto.getRating());
+    review.setComment(reviewDto.getComment());
+    review.setReviewDate(reviewDto.getReviewDate());
+
+    // Save the review to the database
+    Review savedReview = reviewRepository.save(review);
+
+    //Return the saved Review as ReviewDTO, including pluginId
+    return modelMapper.map(savedReview, ReviewDto.class);
+}
+
+public List<ReviewDto> getReviewsByPluginAndVersion(Long pluginId, String versionNumber){
+    Plugin plugin = pluginRepository.findById(pluginId)
+            .orElseThrow(() -> new RuntimeException("Plugin not found"));
+    PluginVersion pluginVersion = pluginVersionRepository.findByPluginAndVersionNumber(plugin, versionNumber);
+//                .orElseThrow(() -> new RuntimeException("Plugin with ID  not found"));
+
+    List<Review> reviews = reviewRepository.findByPluginVersion(pluginVersion);
+    return reviews.stream().map(review -> modelMapper.map(review, ReviewDto.class))
+            .collect(Collectors.toList());
+}
+
 //    @GetMapping("/{id}/{versionId}")
     public PluginDto getPluginByVersionId(Long versionId){
         PluginVersion version =  pluginVersionRepository.findById(versionId)
@@ -98,6 +147,8 @@ public class PluginService {
 
 
     }
+
+
 
     public PluginDto updatePlugin(Long id, PluginDto pluginDto){
         Plugin plugin = pluginRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
@@ -110,5 +161,12 @@ public class PluginService {
 
     public void deletePlugin(Long id) {
         pluginRepository.deleteById(id);
+    }
+
+    public PluginVersion getPluginVersionByPluginAndVersion(Long pluginId, String versionNumber) {
+    Plugin plugin = pluginRepository.findById(pluginId)
+            .orElseThrow(() -> new RuntimeException("plugin not found"));
+    return pluginVersionRepository.findByPluginAndVersionNumber(plugin, versionNumber);
+
     }
 }

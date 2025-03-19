@@ -22,10 +22,10 @@ public class PluginDto {
     private String authorName;
     private List<PluginVersionDto> pluginVersions;
 
+
     //=============== New added ================= //
 
-    private List<DownloadPluginDto> downloadPlugins;
-    private List<ReviewDto> reviews;
+
 
 
 }

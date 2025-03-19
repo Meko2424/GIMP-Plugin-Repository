@@ -37,15 +37,15 @@ public class Plugin {
 
     //================== New added attributes ==================== //
 
-    @OneToMany(mappedBy = "plugin",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<DownloadPlugin> pluginDownloads;
+//    @OneToMany(mappedBy = "plugin",
+//            fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//    private List<DownloadPlugin> pluginDownloads;
 
-    @OneToMany(mappedBy = "plugin",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<Review> reviews;
+//    @OneToMany(mappedBy = "plugin",
+//            fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//    private List<Review> reviews;
 
 
 }

@@ -1,8 +1,11 @@
 package com.GIMP_plugin_repository.Plugin.Controller;
 
 import com.GIMP_plugin_repository.Plugin.Dto.PluginDto;
+import com.GIMP_plugin_repository.Plugin.Model.Plugin;
 import com.GIMP_plugin_repository.Plugin.Service.PluginService;
+import com.GIMP_plugin_repository.Review.Dto.ReviewDto;
 import com.GIMP_plugin_repository.Version.Dto.PluginVersionDto;
+import com.GIMP_plugin_repository.Version.Model.PluginVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +53,21 @@ public class PluginController {
     public ResponseEntity<PluginVersionDto> createPluginVersion(@PathVariable Long pluginId, @RequestBody PluginVersionDto pluginVersionDto){
         PluginVersionDto versionDto = pluginService.createPluginVersion(pluginId, pluginVersionDto);
         return ResponseEntity.ok(versionDto);
+    }
+
+    @PostMapping("/{pluginId}/versions/{versionNumber}/reviews")
+    public ResponseEntity<ReviewDto> createReview(@PathVariable Long pluginId,
+                                                  @PathVariable String versionNumber,
+                                                  @RequestBody ReviewDto reviewDto){
+
+        ReviewDto createdReview = pluginService.createReview(pluginId, versionNumber, reviewDto);
+        return ResponseEntity.ok(createdReview);
+    }
+
+    @GetMapping("/{pluginId}/versions/{versionNumber}/reviews")
+    public ResponseEntity<List<ReviewDto>> getReviewsByPluginAndVersion(@PathVariable Long pluginId, @PathVariable String versionNumber){
+        List<ReviewDto> reviews = pluginService.getReviewsByPluginAndVersion(pluginId, versionNumber);
+        return ResponseEntity.ok(reviews);
     }
 
 

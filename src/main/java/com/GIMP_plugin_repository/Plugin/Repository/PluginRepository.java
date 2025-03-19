@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface PluginRepository extends JpaRepository<Plugin, Long> {
 //    Optional<Object> findByIdByIdAndVersionId(Long id, Long versionId);
+
 }

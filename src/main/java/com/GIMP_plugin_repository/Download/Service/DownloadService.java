@@ -7,10 +7,13 @@ import com.GIMP_plugin_repository.Plugin.Model.Plugin;
 import com.GIMP_plugin_repository.Plugin.Repository.PluginRepository;
 import com.GIMP_plugin_repository.User.Model.User;
 import com.GIMP_plugin_repository.User.Repository.UserRepository;
+import com.GIMP_plugin_repository.Version.Model.PluginVersion;
+import com.GIMP_plugin_repository.Version.Repository.PluginVersionRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -18,7 +21,7 @@ public class DownloadService {
     @Autowired
     private DownloadRepository downloadRepository;
 
-    private PluginRepository pluginRepository;
+    private PluginVersionRepository pluginVersionRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -27,16 +30,16 @@ public class DownloadService {
     public DownloadPluginDto createPluginDownload(DownloadPluginDto downloadPluginDto){
         DownloadPlugin downloadPlugin = modelMapper.map(downloadPluginDto, DownloadPlugin.class);
 
-        User user = userRepository.findById(downloadPluginDto.getUserId())
+        User user = userRepository.findById(downloadPluginDto.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Plugin plugin = pluginRepository.findById(downloadPluginDto.getPluginId())
+        PluginVersion pluginVersion = pluginVersionRepository.findById(downloadPluginDto.getPluginVersion().getId())
                 .orElseThrow(() -> new RuntimeException("Plugin not found"));
 
         downloadPlugin.setUser(user);
-        downloadPlugin.setPlugin(plugin);
+        downloadPlugin.setPluginVersion(pluginVersion);
 
-        downloadPlugin.setDownloadDate(LocalDateTime.now());
+        downloadPlugin.setDownloadDate(LocalDate.now());
 
         DownloadPlugin savedDownload = downloadRepository.save(downloadPlugin);
         return  modelMapper.map(savedDownload, DownloadPluginDto.class);
