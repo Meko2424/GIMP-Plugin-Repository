@@ -34,18 +34,18 @@ public class PluginController {
       return  ResponseEntity.ok(plugins);
     }
 
-    // Get a plugin by Id
+    // Get a plugin by id
     @GetMapping("/{id}")
     public ResponseEntity<?> getPluginById(@PathVariable Long id){
         Optional<PluginDto> pluginDto = pluginService.getPluginById(id);
         return  ResponseEntity.ok(pluginDto);
     }
 
-    // Get a plugin by id and version id
-    @GetMapping("/{pluginId}/version/{versionId}")
-    public ResponseEntity<PluginDto> getPluginByVersionId(@PathVariable Long versionId){
-        PluginDto plugin = pluginService.getPluginByVersionId(versionId);
-        return ResponseEntity.ok(plugin);
+    // Get all versions by pluginId
+    @GetMapping("/{pluginId}/versions")
+    public ResponseEntity<List<PluginVersionDto>> getPluginVersionsByPluginId(@PathVariable Long pluginId){
+        List<PluginVersionDto> versionDto = pluginService.getPluginVersionsByPluginId(pluginId);
+        return ResponseEntity.ok(versionDto);
     }
 
     // Create version for a plugin
