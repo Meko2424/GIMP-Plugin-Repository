@@ -1,6 +1,7 @@
 package com.GIMP_plugin_repository.Plugin.Model;
 
 import com.GIMP_plugin_repository.Author.Model.Author;
+import com.GIMP_plugin_repository.Category.Model.Category;
 import com.GIMP_plugin_repository.Download.Model.DownloadPlugin;
 import com.GIMP_plugin_repository.Review.Model.Review;
 import com.GIMP_plugin_repository.Version.Model.PluginVersion;
@@ -29,6 +30,9 @@ public class Plugin {
     @JoinColumn(name = "fk_author_id", referencedColumnName = "author_id")
     private Author author;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_category_id", referencedColumnName = "category_id")
+    private Category category;
 
     @OneToMany(mappedBy = "plugin",
             fetch = FetchType.LAZY,

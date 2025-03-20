@@ -2,6 +2,8 @@ package com.GIMP_plugin_repository.Plugin.Service;
 
 import com.GIMP_plugin_repository.Author.Model.Author;
 import com.GIMP_plugin_repository.Author.Repository.AuthorRepository;
+import com.GIMP_plugin_repository.Category.Model.Category;
+import com.GIMP_plugin_repository.Category.Repository.CategoryRepository;
 import com.GIMP_plugin_repository.Plugin.Dto.PluginDto;
 import com.GIMP_plugin_repository.Plugin.Model.Plugin;
 import com.GIMP_plugin_repository.Plugin.Repository.PluginRepository;
@@ -26,6 +28,9 @@ public class PluginService {
     private  PluginRepository pluginRepository;
     @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
    @Autowired
     private PluginVersionRepository pluginVersionRepository;
@@ -53,7 +58,14 @@ public class PluginService {
                     newAuthor.setName(pluginDto.getAuthorName());
                     return authorRepository.save(newAuthor);
                 });
+        Category category = categoryRepository.findByName(pluginDto.getCategoryName())
+                .orElseGet(() -> {
+                    Category newCategory = new Category();
+                    newCategory.setName(pluginDto.getCategoryName());
+                    return categoryRepository.save(newCategory);
+                });
         plugin.setAuthor(author);
+        plugin.setCategory(category);
 
         List<PluginVersion> pluginVersions = pluginDto.getPluginVersions().stream()
                 .map(versionDto -> modelMapper.map(versionDto, PluginVersion.class))
@@ -69,23 +81,19 @@ public class PluginService {
 
     public PluginVersionDto createPluginVersion(Long pluginId, PluginVersionDto pluginVersionDto){
 
-        // Retrieve plugin by pluginId
+                // Retrieve plugin by pluginId
         Plugin plugin = pluginRepository.findById(pluginId)
                 .orElseThrow(() -> new RuntimeException("Plugin not found"));
-
-
         PluginVersion pluginVersion = modelMapper.map(pluginVersionDto, PluginVersion.class);
         pluginVersion.setPlugin(plugin);
         PluginVersion savedPluginVersion = pluginVersionRepository.save(pluginVersion);
         return modelMapper.map(savedPluginVersion, PluginVersionDto.class);
     }
 
-    // Get all plugins
-
+              // Get all plugins
     public List<PluginDto> getAllPlugins() {
         List<Plugin> pluginList = pluginRepository.findAll();
         return   pluginList.stream().map(plugin -> modelMapper.map(plugin, PluginDto.class)).toList();
-
     }
 
     // Get a plugin by id

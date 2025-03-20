@@ -20,6 +20,7 @@ public class PluginDto {
     private String title;
     private String description;
     private String authorName;
+    private String categoryName;
     private List<PluginVersionDto> pluginVersions;
 
 

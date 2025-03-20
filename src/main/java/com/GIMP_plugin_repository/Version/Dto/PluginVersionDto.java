@@ -27,5 +27,5 @@ public class PluginVersionDto {
 //    private Plugin plugin;
 //    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate uploadDate = LocalDate.now();
-    private List<ReviewDto> reviews;
+//    private List<ReviewDto> reviews;
 }

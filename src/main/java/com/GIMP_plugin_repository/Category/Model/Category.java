@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name = "CATEGORY")
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Data
+@Entity
+@Table(name = "CATEGORY")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Category {
 
     @Id
