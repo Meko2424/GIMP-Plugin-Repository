@@ -23,9 +23,10 @@ import java.util.List;
 public class PluginVersionDto {
     private Long id;
     private String versionNumber;
+
 //    private List<DownloadPluginDto> downloads;
 //    private Plugin plugin;
 //    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate uploadDate = LocalDate.now();
-//    private List<ReviewDto> reviews;
+    private List<ReviewDto> reviews;
 }

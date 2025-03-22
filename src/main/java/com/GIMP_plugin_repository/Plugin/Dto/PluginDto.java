@@ -5,11 +5,7 @@ import com.GIMP_plugin_repository.Review.Dto.ReviewDto;
 import com.GIMP_plugin_repository.Version.Dto.PluginVersionDto;
 
 import java.util.List;
-
-
 import lombok.*;
-
-
 
 @Data
 @AllArgsConstructor

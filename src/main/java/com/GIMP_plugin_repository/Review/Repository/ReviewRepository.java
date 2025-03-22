@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-//    List<Review> findByPluginIdAndVersionId( Long pluginId, Long pluginVersionId);
+    //    List<Review> findByPluginIdAndVersionId( Long pluginId, Long pluginVersionId);
     List<Review> findByPluginVersion(PluginVersion pluginVersion);
+
 }
