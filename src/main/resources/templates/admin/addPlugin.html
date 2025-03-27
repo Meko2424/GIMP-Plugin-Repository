@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{home::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container p-5 mt-3">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card card-shadow">
+                    <div class="card-header text-center fs-4">Add Plugin</div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label>Enter Title</label>
+                                <input type="text" name="title" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Enter Description</label>
+                                <textarea rows="3" cols=""  class="form-control"></textarea>
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <label>Enter Category</label>
+                                <select class="form-control">
+                                    <option>--select--</option>
+                                    <option>Category 1</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Version Number</label>
+                                <input type="text" name="author" class="form-control">
+                            </div>
+                            <button class="btn-btn-primary col-md-12">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
