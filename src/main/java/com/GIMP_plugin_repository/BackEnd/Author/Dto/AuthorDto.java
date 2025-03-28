@@ -1,35 +1,18 @@
 package com.GIMP_plugin_repository.BackEnd.Author.Dto;
 
-import lombok.Getter;
+import com.GIMP_plugin_repository.BackEnd.Plugin.Model.Plugin;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+import java.util.List;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class AuthorDto {
 
     private Long id;
     private String name;
-
-
-    public AuthorDto(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public AuthorDto() {
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "AuthorDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+    //private List<Plugin> plugins;
 }

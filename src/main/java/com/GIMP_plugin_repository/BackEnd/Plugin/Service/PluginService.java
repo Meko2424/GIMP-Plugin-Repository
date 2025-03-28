@@ -55,14 +55,14 @@ public class PluginService {
                     newAuthor.setName(pluginDto.getAuthorName());
                     return authorRepository.save(newAuthor);
                 });
-        Category category = categoryRepository.findByName(pluginDto.getCategoryName())
-                .orElseGet(() -> {
-                    Category newCategory = new Category();
-                    newCategory.setName(pluginDto.getCategoryName());
-                    return categoryRepository.save(newCategory);
-                });
+//        Category category = categoryRepository.findByName(pluginDto.getCategoryName())
+//                .orElseGet(() -> {
+//                    Category newCategory = new Category();
+//                    newCategory.setName(pluginDto.getCategoryName());
+//                    return categoryRepository.save(newCategory);
+//                });
         plugin.setAuthor(author);
-        plugin.setCategory(category);
+        //plugin.setCategory(category);
 
         List<PluginVersion> pluginVersions = pluginDto.getPluginVersions().stream()
                 .map(versionDto -> modelMapper.map(versionDto, PluginVersion.class))
@@ -90,14 +90,14 @@ public class PluginService {
     public PluginDto updatePlugin(Long id, PluginDto pluginDto) {
         Plugin existingplugin = pluginRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
         Author author = authorRepository.findByName(pluginDto.getAuthorName()).orElseThrow(() -> new RuntimeException("Author not found"));
-        Category category = categoryRepository.findByName(pluginDto.getCategoryName()).orElseThrow(() -> new RuntimeException("Category not found"));
+        //Category category = categoryRepository.findByName(pluginDto.getCategoryName()).orElseThrow(() -> new RuntimeException("Category not found"));
         List<PluginVersion> pluginVersions = pluginVersionRepository.findByPluginId(id);
 
         // Update the fields
         existingplugin.setTitle(pluginDto.getTitle());
         existingplugin.setDescription(pluginDto.getDescription());
         existingplugin.setAuthor(author);
-        existingplugin.setCategory(category);
+        //existingplugin.setCategory(category);
         existingplugin.setPluginVersions(pluginVersions);
 
         // Save the updated plugin
