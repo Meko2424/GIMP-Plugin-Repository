@@ -21,6 +21,6 @@ public class Author {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "author" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Plugin> plugins;
+//    @OneToMany(mappedBy = "author" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Plugin> plugins;
 }

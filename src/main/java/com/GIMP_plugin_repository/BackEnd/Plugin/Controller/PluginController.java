@@ -19,8 +19,12 @@ public class PluginController {
 
     @PostMapping("/createPlugin")
     public ResponseEntity<PluginDto> createPlugin(@RequestBody PluginDto pluginDto) {
-        PluginDto createdPlugin = pluginService.createPlugin(pluginDto);
-        return ResponseEntity.ok(createdPlugin);
+        try {
+            PluginDto createdPlugin = pluginService.createPlugin(pluginDto);
+            return ResponseEntity.ok(createdPlugin);
+        } catch (Exception e) {
+            throw new RuntimeException("Create Plugin failed");
+        }
     }
 
     // Get all plugins
@@ -32,9 +36,9 @@ public class PluginController {
 
     // Get a plugin by id
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPluginById(@PathVariable Long id) {
-        Optional<PluginDto> pluginDto = pluginService.getPluginById(id);
-        return ResponseEntity.ok(pluginDto);
+    public ResponseEntity<PluginDto> getPluginById(@PathVariable Long id) {
+        PluginDto plugin = pluginService.getPluginById(id);
+        return ResponseEntity.ok(plugin);
     }
 
 
