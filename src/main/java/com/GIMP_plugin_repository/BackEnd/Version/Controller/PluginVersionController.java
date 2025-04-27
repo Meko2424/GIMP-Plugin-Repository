@@ -17,16 +17,16 @@ public class PluginVersionController {
     private PluginVersionService pluginVersionService;
 
     // // Get all versions associated with a specific plugin
-    @GetMapping("/{pluginId}/versions")
+    @GetMapping("/plugin/{pluginId}")
     public ResponseEntity<List<PluginVersionDto>> getPluginVersionsByPluginId(@PathVariable Long pluginId) {
-        List<PluginVersionDto> versionDto = pluginVersionService.getPluginVersionsByPluginId(pluginId);
-        return ResponseEntity.ok(versionDto);
+        List<PluginVersionDto> versions = pluginVersionService.getPluginVersionsByPluginId(pluginId);
+        return ResponseEntity.ok(versions);
     }
 
     // Create version for a plugin
-    @PostMapping("/{pluginId}/versions")
+    @PostMapping("/{pluginId}")
     public ResponseEntity<PluginVersionDto> createPluginVersion(@PathVariable Long pluginId, @RequestBody PluginVersionDto pluginVersionDto) {
-        PluginVersionDto versionDto = pluginVersionService.createPluginVersion(pluginId, pluginVersionDto);
-        return ResponseEntity.ok(versionDto);
+        PluginVersionDto savedVersion = pluginVersionService.createPluginVersion(pluginId, pluginVersionDto);
+        return ResponseEntity.ok(savedVersion);
     }
 }

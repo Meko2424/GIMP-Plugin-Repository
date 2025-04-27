@@ -24,10 +24,7 @@ public class PluginVersionService {
     @Autowired
     private PluginRepository pluginRepository;
 
-    public PluginVersionDto getPluginByIdAndVersionId(Long pluginId, Long versionId){
-        PluginVersion pluginVersion = pluginVersionRepository.findByPluginIdAndId(pluginId, versionId);
-        return modelMapper.map(pluginVersion, PluginVersionDto.class);
-    }
+
 
     // Get all versions associated with a specific plugin
     public List<PluginVersionDto> getPluginVersionsByPluginId(Long pluginId) {

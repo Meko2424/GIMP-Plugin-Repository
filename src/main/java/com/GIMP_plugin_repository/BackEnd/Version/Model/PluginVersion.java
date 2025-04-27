@@ -26,33 +26,13 @@ public class PluginVersion {
     @Column(name = "version_id")
     private Long id;
     private String versionNumber;
-    @Column(name = "upload_date")
-    private LocalDate uploadDate = LocalDate.now();
-    private String downloadUrl;
+    @Column(name = "release date")
+    private LocalDate releaseDate;
+
     @ManyToOne
     @JoinColumn(name = "fk_plugin_id", referencedColumnName = "plugin_id")
-    @JsonBackReference
     private Plugin plugin;
 
-//    @ManyToOne
-//    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
-//    private User user;
-
-//    @OneToMany
-//            (mappedBy = "pluginVersion",
-//                    fetch = FetchType.LAZY,
-//                    cascade = CascadeType.ALL)
-//    private List<Review> reviews;
-
-//    @OneToMany
-//            (mappedBy = "pluginVersion",
-//                    fetch = FetchType.LAZY,
-//                    cascade = CascadeType.ALL)
-//    private List<DownloadPlugin> downloads;
-
-//    @ManyToOne
-//    @JoinColumn(name = "fk_download_id", referencedColumnName = "download_id")
-//    private DownloadPlugin downloads;
 
 
 }

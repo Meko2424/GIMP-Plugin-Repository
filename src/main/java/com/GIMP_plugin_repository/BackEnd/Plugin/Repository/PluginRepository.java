@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface PluginRepository extends JpaRepository<Plugin, Long> {
-//    Optional<Object> findByIdByIdAndVersionId(Long id, Long versionId);
-    List<Plugin> findByCategoryId(Long categoryId);
+
 
 }
