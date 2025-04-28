@@ -27,9 +27,11 @@ public class SecurityConfig {
                                 "/api/plugins/uploadFile",
                                 "/api/plugins/createPlugin",
                                 "/api/plugins",
-                                "/api/plugins/id",
+                                "/api/plugins/{id}",
+                                "/api/plugins/versions/{id}",
                                 "/api/plugins/category",
-                                "/api/plugins/download/**"
+                                "/api/plugins/download/**",
+                                "/uploads/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
